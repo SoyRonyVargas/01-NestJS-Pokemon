@@ -1,12 +1,13 @@
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { handleError } from './handlers/handleCreatePokemon';
+import { PaginationDTO } from '../common/dto/PaginationDTO';
 import { CreatePokemonDto } from './dto/create-pokemon.dto';
 import { UpdatePokemonDto } from './dto/update-pokemon.dto';
 import { Pokemon } from './entities/pokemon.entity';
 import { InjectModel } from '@nestjs/mongoose';
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
-import { Model } from 'mongoose';
-import { ObjectId } from 'mongodb';
 import { GetPokemonQuery } from './types';
+import { ObjectId } from 'mongodb';
+import { Model } from 'mongoose';
 
 @Injectable()
 export class PokemonService {
@@ -29,9 +30,16 @@ export class PokemonService {
 
   }
 
-  async findAll() {
+  async findAll( query : PaginationDTO ) {
 
-    return await this.pokemonModel.find()
+    const { 
+      limit = 10
+    } = query
+
+    const pokemons = await this.pokemonModel.find()
+      .limit(limit)
+
+    return pokemons
 
   }
 

@@ -3,6 +3,8 @@ import { PokemonModule } from './pokemon/pokemon.module'
 import { MongooseModule } from '@nestjs/mongoose'
 import { Module } from '@nestjs/common'
 // import { join } from 'path'
+import { SeedModule } from './seed/seed.module';
+import { CommonModule } from './common/common.module';
 
 @Module({
   imports: [
@@ -11,7 +13,9 @@ import { Module } from '@nestjs/common'
     //   rootPath: join( __dirname , '..' , 'public' ),
     //   exclude: ['/api*'],
     // }),
-    PokemonModule
+    PokemonModule,
+    SeedModule,
+    CommonModule
   ],
   controllers: [],
   providers: [],

@@ -14,6 +14,8 @@ import { Module } from '@nestjs/common';
     ])
   ],
   controllers: [PokemonController],
-  providers: [PokemonService]
+  providers: [PokemonService],
+  exports: [ PokemonService ]
+  
 })
 export class PokemonModule {}
